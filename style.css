@@ -32,8 +32,35 @@ footer {
   background-color: var(--charcoal);
 }
 
-.content {
+main {
   background-color: var(--persian-green);
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  padding: 25px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.title:hover {
+  scale: 1.02;
+}
+
+.title:active {
+  scale: 1;
+}
+
+.title h1 {
+  font-size: 4rem;
+  color: var(--charcoal);
+  background-color: var(--burnt-sienna);
+  width: max-content;
+  padding: 25px;
+  border-radius: 25px;
 }
 
 footer {

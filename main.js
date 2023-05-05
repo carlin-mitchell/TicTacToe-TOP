@@ -15,3 +15,11 @@ const generateFooterWithBasicCopyright = (() => {
   footer.appendChild(githubLink);
   document.querySelector("body").appendChild(footer);
 })();
+
+const startButton = document.querySelector(".title h1");
+startButton.onmouseover = () => {
+  startButton.innerText = "Tic Tac Go!";
+};
+startButton.onmouseout = () => {
+  startButton.innerText = "Tic Tac Toe";
+};

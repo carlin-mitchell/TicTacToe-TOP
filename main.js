@@ -1,6 +1,7 @@
-const updateFooterWithBasicCopyright = (() => {
-  const footer = document.querySelector("footer");
-  footer.innerText = `© Carlin Mitchell ${new Date().getFullYear()}`;
+const generateFooterWithBasicCopyright = (() => {
+  const footer = Object.assign(document.createElement("footer"), {
+    innerText: `© Carlin Mitchell ${new Date().getFullYear()}`,
+  });
 
   const githubLink = Object.assign(document.createElement("a"), {
     href: "https://github.com/carlin-mitchell/TicTacToe-TOP",
@@ -12,4 +13,5 @@ const updateFooterWithBasicCopyright = (() => {
 
   githubLink.appendChild(githubIcon);
   footer.appendChild(githubLink);
+  document.querySelector("body").appendChild(footer);
 })();

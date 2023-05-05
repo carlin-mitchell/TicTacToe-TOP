@@ -23,7 +23,7 @@ html {
 body {
   min-height: 100%;
   display: grid;
-  grid-template-rows: 75px auto 75px;
+  grid-template-rows: auto 75px;
   font-family: sans-serif;
 }
 

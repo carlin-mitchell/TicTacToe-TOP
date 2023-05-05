@@ -54,8 +54,9 @@ main {
   scale: 1;
 }
 
-.title h1 {
+.title div {
   font-size: 4rem;
+  font-weight: bold;
   color: var(--charcoal);
   background-color: var(--burnt-sienna);
   width: max-content;
@@ -83,4 +84,9 @@ footer img:hover {
 
 footer img:active {
   scale: 1;
+}
+
+/* ---------------UTILITY CLASSES--------------- */
+.unselectable {
+  user-select: none;
 }

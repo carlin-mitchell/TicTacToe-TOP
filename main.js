@@ -1,4 +1,4 @@
-const footerWithBasicCopyright = (() => {
+const FooterWithBasicCopyright = (() => {
   const footer = Object.assign(document.createElement("footer"), {
     innerText: `© Carlin Mitchell ${new Date().getFullYear()}`,
   });
@@ -13,13 +13,51 @@ const footerWithBasicCopyright = (() => {
 
   githubLink.appendChild(githubIcon);
   footer.appendChild(githubLink);
-  document.querySelector("body").appendChild(footer);
+
+  return footer;
 })();
 
-const startButton = document.querySelector(".title h1");
-startButton.onmouseover = () => {
-  startButton.innerText = "Tic Tac Go!";
-};
-startButton.onmouseout = () => {
-  startButton.innerText = "Tic Tac Toe";
-};
+const StartButton = (() => {
+  const startingText = "Tic Tac Toe";
+  const button = Object.assign(document.createElement("div"), {
+    className: "unselectable",
+    innerText: startingText,
+    onmouseover: function () {
+      this.innerText = startingText.replace("Toe", "Go!");
+    },
+    onmouseout: function () {
+      this.innerText = startingText;
+    },
+  });
+  return button;
+})();
+
+const TitleRow = (() => {
+  const row = Object.assign(document.createElement("div"), {
+    className: "title",
+  });
+  row.appendChild(StartButton);
+  return row;
+})();
+
+const GameRow = (() => {
+  const row = Object.assign(document.createElement("div"), {
+    className: "game",
+  });
+  return row;
+})();
+
+const MainDiv = (() => {
+  const main = document.createElement("main");
+  main.appendChild(TitleRow);
+  main.appendChild(GameRow);
+
+  return main;
+})();
+
+// const title = document.querySelector(".title");
+// title.appendChild(StartButton);
+
+const body = document.querySelector("body");
+body.appendChild(MainDiv);
+body.appendChild(FooterWithBasicCopyright);

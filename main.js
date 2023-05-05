@@ -1,4 +1,4 @@
-const generateFooterWithBasicCopyright = (() => {
+const footerWithBasicCopyright = (() => {
   const footer = Object.assign(document.createElement("footer"), {
     innerText: `© Carlin Mitchell ${new Date().getFullYear()}`,
   });

@@ -1,0 +1,59 @@
+:root {
+  /* colors */
+  --charcoal: #264653ff;
+  --persian-green: #2a9d8fff;
+  --saffron: #e9c46aff;
+  --sandy-brown: #f4a261ff;
+  --burnt-sienna: #e76f51ff;
+
+  --marginSpace: 0.3rem;
+  --footer-font-size: 1.2rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 75px auto 75px;
+  font-family: sans-serif;
+}
+
+header,
+footer {
+  background-color: var(--charcoal);
+}
+
+.content {
+  background-color: var(--persian-green);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  font-size: var(--footer-font-size);
+}
+
+footer img {
+  height: calc(var(--footer-font-size) - 0.2rem);
+  margin-left: var(--marginSpace);
+}
+
+footer img:hover {
+  scale: 1.2;
+}
+
+footer img:active {
+  scale: 1;
+}

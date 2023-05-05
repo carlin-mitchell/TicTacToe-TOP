@@ -1,0 +1,11 @@
+{
+  "extends": ["prettier"],
+  "ignorePatterns": ["**/*.html"],
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  }
+}

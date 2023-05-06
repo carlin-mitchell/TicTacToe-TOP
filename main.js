@@ -40,10 +40,31 @@ const TitleRow = (() => {
   return row;
 })();
 
+const GameTile = (() => {
+  const tile = Object.assign(document.createElement("div"), {
+    className: "game-tile",
+  });
+  return tile;
+})();
+
+const GameDiv = (() => {
+  const div = Object.assign(document.createElement("div"), {
+    className: "game-div",
+  });
+
+  for (i = 0; i < 9; i++) {
+    div.appendChild(GameTile.cloneNode(true));
+    console.log("create tile" + i);
+  }
+
+  return div;
+})();
+
 const GameRow = (() => {
   const row = Object.assign(document.createElement("div"), {
-    className: "game",
+    className: "game-row",
   });
+  row.appendChild(GameDiv);
   return row;
 })();
 

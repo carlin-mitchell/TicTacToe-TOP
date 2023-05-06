@@ -8,6 +8,10 @@
 
   --marginSpace: 0.3rem;
   --footer-font-size: 1.2rem;
+  --tile-size: 175px;
+
+  --small-br: 5px;
+  --med-br: 10px;
 }
 
 * {
@@ -35,7 +39,7 @@ footer {
 main {
   background-color: var(--persian-green);
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 20vh auto;
   padding: 25px;
 }
 
@@ -67,6 +71,34 @@ main {
   box-shadow: 10px 10px 7px -4px var(--charcoal);
 }
 
+.game-row {
+  display: grid;
+}
+
+.game-div {
+  display: grid;
+  background-color: var(--saffron);
+  gap: 20px;
+  justify-self: center;
+  grid-template-columns: repeat(3, var(--tile-size));
+  grid-template-rows: repeat(3, var(--tile-size));
+  padding: 20px;
+  border-radius: var(--med-br);
+}
+
+.game-tile {
+  background-color: var(--sandy-brown);
+  border-radius: var(--med-br);
+  border: solid 3px var(--burnt-sienna);
+}
+
+.game-tile:hover {
+  scale: 1.05;
+}
+
+.game-tile:active {
+  scale: 1;
+}
 footer {
   display: flex;
   justify-content: center;

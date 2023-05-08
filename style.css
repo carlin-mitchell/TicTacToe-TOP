@@ -39,7 +39,7 @@ footer {
 main {
   background-color: var(--persian-green);
   display: grid;
-  grid-template-rows: 20vh auto;
+  gap: 30px;
   padding: 25px;
 }
 
@@ -48,6 +48,7 @@ main {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  height: max-content;
 }
 
 .title:hover {
@@ -84,6 +85,7 @@ main {
   grid-template-rows: repeat(3, var(--tile-size));
   padding: 20px;
   border-radius: var(--med-br);
+  height: max-content;
 }
 
 .game-tile {
@@ -94,6 +96,7 @@ main {
 
 .game-tile:hover {
   scale: 1.05;
+  cursor: pointer;
 }
 
 .game-tile:active {

@@ -1,3 +1,13 @@
+const gameBrain = (() => {
+  //
+})();
+
+const gameBoard = (() => {
+  //
+})();
+
+const Player = () => {};
+
 const FooterWithBasicCopyright = (() => {
   const footer = Object.assign(document.createElement("footer"), {
     innerText: `© Carlin Mitchell ${new Date().getFullYear()}`,

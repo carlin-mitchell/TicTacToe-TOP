@@ -104,6 +104,7 @@ main {
 }
 footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
@@ -122,6 +123,20 @@ footer img:hover {
 
 footer img:active {
   scale: 1;
+}
+
+footer .top-attribution {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+footer .top-link {
+  color: var(--burnt-sienna);
+  margin-left: var(--marginSpace);
+}
+
+footer .top-link:visited {
+  color: var(--burnt-sienna);
 }
 
 /* ---------------UTILITY CLASSES--------------- */

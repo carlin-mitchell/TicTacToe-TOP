@@ -1,16 +1,39 @@
 const gameBrain = (() => {
-  //
-})();
+  const gameBoard = new Array(9).fill(null, 0, 9);
 
-const gameBoard = (() => {
-  //
+  return { gameBoard };
+})();
+console.log(gameBrain.gameBoard);
+
+const screenController = (() => {
+  function setInitialView() {
+    const body = document.querySelector("body");
+    body.appendChild(MainDiv);
+    body.appendChild(FooterWithBasicCopyright);
+  }
+
+  return { setInitialView };
 })();
 
 const Player = () => {};
 
 const FooterWithBasicCopyright = (() => {
-  const footer = Object.assign(document.createElement("footer"), {
+  const footer = Object.assign(document.createElement("footer"), {});
+
+  const copyrightContainer = Object.assign(document.createElement("div"), {
+    className: "copyright-container",
     innerText: `© Carlin Mitchell ${new Date().getFullYear()}`,
+  });
+
+  const topContainer = Object.assign(document.createElement("div"), {
+    className: "top-attribution",
+    innerText: "Inspired by",
+  });
+
+  const topLink = Object.assign(document.createElement("a"), {
+    className: "top-link",
+    innerText: "The Odin Project",
+    href: "https://www.theodinproject.com/",
   });
 
   const githubLink = Object.assign(document.createElement("a"), {
@@ -22,7 +45,10 @@ const FooterWithBasicCopyright = (() => {
   });
 
   githubLink.appendChild(githubIcon);
-  footer.appendChild(githubLink);
+  copyrightContainer.appendChild(githubLink);
+  topContainer.appendChild(topLink);
+  footer.appendChild(copyrightContainer);
+  footer.appendChild(topContainer);
 
   return footer;
 })();
@@ -50,12 +76,12 @@ const TitleRow = (() => {
   return row;
 })();
 
-const GameTile = (() => {
+const GameTile = () => {
   const tile = Object.assign(document.createElement("div"), {
     className: "game-tile",
   });
   return tile;
-})();
+};
 
 const GameDiv = (() => {
   const div = Object.assign(document.createElement("div"), {
@@ -63,8 +89,9 @@ const GameDiv = (() => {
   });
 
   for (i = 0; i < 9; i++) {
-    div.appendChild(GameTile.cloneNode(true));
-    console.log("create tile" + i);
+    const tile = GameTile();
+    tile.id = `tile-${i}`;
+    div.appendChild(tile);
   }
 
   return div;
@@ -86,9 +113,4 @@ const MainDiv = (() => {
   return main;
 })();
 
-// const title = document.querySelector(".title");
-// title.appendChild(StartButton);
-
-const body = document.querySelector("body");
-body.appendChild(MainDiv);
-body.appendChild(FooterWithBasicCopyright);
+screenController.setInitialView();

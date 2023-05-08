@@ -91,7 +91,7 @@ main {
 .game-tile {
   background-color: var(--sandy-brown);
   border-radius: var(--med-br);
-  border: solid 3px var(--burnt-sienna);
+  border: solid 5px var(--burnt-sienna);
 }
 
 .game-tile:hover {

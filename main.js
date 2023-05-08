@@ -1,9 +1,23 @@
 const gameBrain = (() => {
-  const gameBoard = new Array(9).fill(null, 0, 9);
+  let gameBoard = Array(9).fill(null);
+  let playerTurn = 1;
 
-  return { gameBoard };
+  const changePlayerTurn = () => {
+    playerTurn = playerTurn === 1 ? 2 : 1;
+  };
+
+  const getPlayerTurn = () => playerTurn;
+
+  const getGameBoard = () => gameBoard;
+
+  const resetGameBoard = () => {
+    gameBoard = [...gameBoard].map((tile) =>
+      tile || tile === 0 ? null : tile
+    );
+  };
+
+  return { getGameBoard, resetGameBoard, getPlayerTurn };
 })();
-console.log(gameBrain.gameBoard);
 
 const screenController = (() => {
   function setInitialView() {
@@ -114,3 +128,5 @@ const MainDiv = (() => {
 })();
 
 screenController.setInitialView();
+
+gameBrain.resetGameBoard();

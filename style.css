@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
 :root {
   /* colors */
   --charcoal: #264653ff;
@@ -28,7 +30,7 @@ body {
   min-height: 100%;
   display: grid;
   grid-template-rows: auto 75px;
-  font-family: sans-serif;
+  font-family: "Varela Round", sans-serif;
 }
 
 header,

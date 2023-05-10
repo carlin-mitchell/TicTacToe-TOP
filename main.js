@@ -1,5 +1,6 @@
 const gameBrain = (() => {
-  let gameIsActive = true;
+  let gameIsOver = true;
+  let getGameIsOver = () => gameIsOver;
 
   let playerTurn = "X";
   const togglePlayerTurn = () => (playerTurn = playerTurn === "X" ? "O" : "X");
@@ -14,12 +15,9 @@ const gameBrain = (() => {
     );
   };
 
-  const playRound = () => {
-    //
-  };
-
   return {
     getGameBoard,
+    getGameIsOver,
     resetGameBoard,
     getPlayerTurn,
     togglePlayerTurn,
@@ -115,10 +113,14 @@ const StartButton = (() => {
     className: "unselectable",
     innerText: startingText,
     onmouseover: function () {
-      this.innerText = startingText.replace("Toe", "Go!");
+      if (gameBrain.getGameIsOver()) {
+        this.innerText = startingText.replace("Toe", "Go!");
+      }
     },
     onmouseout: function () {
-      this.innerText = startingText;
+      if (gameBrain.getGameIsOver()) {
+        this.innerText = startingText;
+      }
     },
   });
   return button;
@@ -173,25 +175,25 @@ screenController.setInitialView();
 
 gameBrain.resetGameBoard();
 
-MainDiv.addEventListener("click", (e) => {
-  const clickedItem = e.target;
-  //test if the user clicked on a game tile
-  if (/tile-[0-9]/.test(clickedItem.id)) {
-    const playerTurn = gameBrain.getPlayerTurn();
-    clickedItem.appendChild(
-      Object.assign(document.createElement("img"), {
-        src: `/assets/icons/${playerTurn === "X" ? "X" : "O"}-charcoal.png`,
-      })
-    );
-    gameBrain.togglePlayerTurn();
-    screenController.setPlayerDisplay();
-  } else if (/start-button/.test(clickedItem.id)) {
-    screenController.clearGameBoard();
-    gameBrain.setPlayerTurn("X");
-    screenController.unhidePlayerDisplay();
-    screenController.setPlayerDisplay();
-  } else {
-    console.log(e);
-    return;
-  }
-});
+// window.addEventListener("click", (e) => {
+//   const clickedItem = e.target;
+//   //test if the user clicked on a game tile
+//   if (/tile-[0-9]/.test(clickedItem.id)) {
+//     const playerTurn = gameBrain.getPlayerTurn();
+//     clickedItem.appendChild(
+//       Object.assign(document.createElement("img"), {
+//         src: `/assets/icons/${playerTurn === "X" ? "X" : "O"}-charcoal.png`,
+//       })
+//     );
+//     gameBrain.togglePlayerTurn();
+//     screenController.setPlayerDisplay();
+//   } else if (/start-button/.test(clickedItem.id)) {
+//     screenController.clearGameBoard();
+//     gameBrain.setPlayerTurn("X");
+//     screenController.unhidePlayerDisplay();
+//     screenController.setPlayerDisplay();
+//   } else {
+//     console.log(e);
+//     return;
+//   }
+// });

@@ -72,6 +72,13 @@ main {
   box-shadow: 10px 10px 7px -4px var(--charcoal);
 }
 
+.player-turn-div {
+  color: var(--charcoal);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .game-row {
   display: grid;
 }
@@ -92,6 +99,13 @@ main {
   background-color: var(--sandy-brown);
   border-radius: var(--med-br);
   border: solid 5px var(--burnt-sienna);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-tile img {
+  height: 95%;
 }
 
 .game-tile:hover {
@@ -142,4 +156,8 @@ footer .top-link:visited {
 /* ---------------UTILITY CLASSES--------------- */
 .unselectable {
   user-select: none;
+}
+
+.hidden {
+  visibility: hidden;
 }

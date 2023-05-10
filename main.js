@@ -1,22 +1,30 @@
 const gameBrain = (() => {
-  let gameBoard = Array(9).fill(null);
-  let playerTurn = 1;
+  let gameIsActive = true;
 
-  const changePlayerTurn = () => {
-    playerTurn = playerTurn === 1 ? 2 : 1;
-  };
-
+  let playerTurn = "X";
+  const togglePlayerTurn = () => (playerTurn = playerTurn === "X" ? "O" : "X");
   const getPlayerTurn = () => playerTurn;
+  const setPlayerTurn = (turn) => (playerTurn = turn);
 
+  let gameBoard = Array(9).fill(null);
   const getGameBoard = () => gameBoard;
-
   const resetGameBoard = () => {
     gameBoard = [...gameBoard].map((tile) =>
       tile || tile === 0 ? null : tile
     );
   };
 
-  return { getGameBoard, resetGameBoard, getPlayerTurn };
+  const playRound = () => {
+    //
+  };
+
+  return {
+    getGameBoard,
+    resetGameBoard,
+    getPlayerTurn,
+    togglePlayerTurn,
+    setPlayerTurn,
+  };
 })();
 
 const screenController = (() => {
@@ -26,7 +34,32 @@ const screenController = (() => {
     body.appendChild(FooterWithBasicCopyright);
   }
 
-  return { setInitialView };
+  const clearGameBoard = () => {
+    const tiles = document.querySelectorAll(".game-tile");
+    tiles.forEach((tile) => {
+      while (tile.firstChild) {
+        tile.removeChild(tile.firstChild);
+      }
+    });
+  };
+
+  const setPlayerDisplay = () => {
+    const display = document.querySelector(".player-turn-div");
+    display.innerText = `It's ${gameBrain.getPlayerTurn()}'s turn`;
+  };
+
+  const unhidePlayerDisplay = () => {
+    const display = document.querySelector(".player-turn-div");
+    console.log(display);
+    display.classList.remove("hidden");
+  };
+
+  return {
+    setInitialView,
+    clearGameBoard,
+    setPlayerDisplay,
+    unhidePlayerDisplay,
+  };
 })();
 
 const Player = () => {};
@@ -67,9 +100,18 @@ const FooterWithBasicCopyright = (() => {
   return footer;
 })();
 
+const PlayerTurnDiv = (() => {
+  const div = Object.assign(document.createElement("div"), {
+    className: "player-turn-div hidden",
+    innerText: "It's X's Turn",
+  });
+  return div;
+})();
+
 const StartButton = (() => {
   const startingText = "Tic Tac Toe";
   const button = Object.assign(document.createElement("div"), {
+    id: "start-button",
     className: "unselectable",
     innerText: startingText,
     onmouseover: function () {
@@ -102,7 +144,7 @@ const GameDiv = (() => {
     className: "game-div",
   });
 
-  for (i = 0; i < 9; i++) {
+  for (let i = 0; i < 9; i++) {
     const tile = GameTile();
     tile.id = `tile-${i}`;
     div.appendChild(tile);
@@ -122,11 +164,34 @@ const GameRow = (() => {
 const MainDiv = (() => {
   const main = document.createElement("main");
   main.appendChild(TitleRow);
+  main.appendChild(PlayerTurnDiv);
   main.appendChild(GameRow);
-
   return main;
 })();
 
 screenController.setInitialView();
 
 gameBrain.resetGameBoard();
+
+MainDiv.addEventListener("click", (e) => {
+  const clickedItem = e.target;
+  //test if the user clicked on a game tile
+  if (/tile-[0-9]/.test(clickedItem.id)) {
+    const playerTurn = gameBrain.getPlayerTurn();
+    clickedItem.appendChild(
+      Object.assign(document.createElement("img"), {
+        src: `/assets/icons/${playerTurn === "X" ? "X" : "O"}-charcoal.png`,
+      })
+    );
+    gameBrain.togglePlayerTurn();
+    screenController.setPlayerDisplay();
+  } else if (/start-button/.test(clickedItem.id)) {
+    screenController.clearGameBoard();
+    gameBrain.setPlayerTurn("X");
+    screenController.unhidePlayerDisplay();
+    screenController.setPlayerDisplay();
+  } else {
+    console.log(e);
+    return;
+  }
+});

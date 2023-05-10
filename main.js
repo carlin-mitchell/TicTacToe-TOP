@@ -67,6 +67,7 @@ const gameBrain = (() => {
     const winRegex = /XXX|OOO/;
     if (winRegex.test(row1) || winRegex.test(row2) || winRegex.test(row3)) {
       console.log("row win!");
+      winner = true;
       endGame();
     } else if (
       winRegex.test(col1) ||

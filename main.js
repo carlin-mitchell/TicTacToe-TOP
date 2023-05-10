@@ -2,6 +2,8 @@ const gameBrain = (() => {
   let gameIsOver = true;
   let getGameIsOver = () => gameIsOver;
 
+  let winner = false;
+
   let playerTurn = "X";
   const togglePlayerTurn = () => (playerTurn = playerTurn === "X" ? "O" : "X");
   const getPlayerTurn = () => playerTurn;
@@ -14,6 +16,56 @@ const gameBrain = (() => {
       tile || tile === 0 ? null : tile
     );
   };
+  const updateGameBoard = (tileId) => {
+    const tileNumber = parseInt(tileId.split("-")[1]);
+    gameBoard = gameBoard.map((tile, index) =>
+      index === tileNumber ? playerTurn : tile
+    );
+  };
+
+  const nextTurn = (tileId) => {
+    updateGameBoard(tileId);
+    screenController.updateGameTile(tileId);
+    togglePlayerTurn();
+    screenController.setPlayerDisplay();
+    checkIfGameIsOver();
+  };
+
+  const playRound = () => {
+    gameIsOver = false;
+    screenController.clearGameBoard();
+    screenController.unhidePlayerDisplay();
+  };
+
+  const checkForWinner = () => {};
+
+  const checkIfGameIsOver = () => {
+    if (gameBoard.filter((tile) => tile === null).length === 0) {
+      //all the tiles are filled
+      gameIsOver = true;
+      resetGameBoard();
+      screenController.setPlayerDisplay();
+      StartButton.innerText = "Tic Tac Toe";
+    }
+  };
+
+  // determine if a user click is legit and execute the appropriate action if so
+  window.addEventListener("click", (e) => {
+    const clickedElement = e.target;
+    const id = clickedElement.id;
+
+    if (/start-button/.test(id)) {
+      // the user clicked on the start button
+      if (gameIsOver) {
+        playRound();
+      }
+    } else if (/tile-[0-9]/.test(id)) {
+      // the user clicked on a game tile
+      if (!gameIsOver) {
+        nextTurn(id);
+      }
+    }
+  });
 
   return {
     getGameBoard,
@@ -43,13 +95,28 @@ const screenController = (() => {
 
   const setPlayerDisplay = () => {
     const display = document.querySelector(".player-turn-div");
-    display.innerText = `It's ${gameBrain.getPlayerTurn()}'s turn`;
+    if (!gameBrain.getGameIsOver()) {
+      display.innerText = `It's ${gameBrain.getPlayerTurn()}'s turn`;
+    } else {
+      display.innerText = "It's a draw";
+    }
   };
 
   const unhidePlayerDisplay = () => {
     const display = document.querySelector(".player-turn-div");
-    console.log(display);
     display.classList.remove("hidden");
+  };
+
+  const updateGameTile = (id) => {
+    const tile = document.querySelector(`#${id}`);
+    console.log(id);
+    const symbol = Object.assign(document.createElement("img"), {
+      src: `assets/icons/${
+        gameBrain.getPlayerTurn() === "X" ? "X" : "O"
+      }-charcoal.png`,
+    });
+
+    tile.appendChild(symbol);
   };
 
   return {
@@ -57,6 +124,7 @@ const screenController = (() => {
     clearGameBoard,
     setPlayerDisplay,
     unhidePlayerDisplay,
+    updateGameTile,
   };
 })();
 

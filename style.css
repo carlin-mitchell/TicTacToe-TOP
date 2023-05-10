@@ -29,7 +29,7 @@ html {
 body {
   min-height: 100%;
   display: grid;
-  grid-template-rows: auto 75px;
+  grid-template-rows: auto min(1fr, 75px);
   font-family: "Varela Round", sans-serif;
 }
 
@@ -39,6 +39,7 @@ footer {
 }
 
 main {
+  height: 100%;
   background-color: var(--persian-green);
   display: grid;
   gap: 30px;

@@ -177,8 +177,6 @@ const screenController = (() => {
   };
 })();
 
-const Player = () => {};
-
 const FooterWithBasicCopyright = (() => {
   const footer = Object.assign(document.createElement("footer"), {});
 
